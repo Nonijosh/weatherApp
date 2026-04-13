@@ -20,7 +20,12 @@ func main() {
 		http.ServeFile(w, r, "static/index.html")
 	})
 
-	addr := ":8080"
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	addr := ":" + port
 	log.Printf("Starting server on %s", addr)
 	log.Fatal(http.ListenAndServe(addr, nil))
 }
