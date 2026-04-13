@@ -26,7 +26,7 @@ func main() {
 	}
 
 	addr := ":" + port
-	log.Printf("Starting server on %s", addr)
+	log.Printf("Starting server on :%s", port)
 	log.Fatal(http.ListenAndServe(addr, nil))
 }
 
