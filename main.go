@@ -1,7 +1,9 @@
 package main
 
 import (
+	"embed"
 	"io"
+	"io/fs"
 	"log"
 	"net/http"
 	"net/url"
@@ -11,13 +13,28 @@ import (
 	"github.com/joho/godotenv"
 )
 
+//go:embed static/*
+var staticFiles embed.FS
+
 func main() {
 	_ = godotenv.Load()
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	staticFS, err := fs.Sub(staticFiles, "static")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFS))))
 	http.HandleFunc("/api/weather", weatherHandler)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "static/index.html")
+		data, err := staticFiles.ReadFile("static/index.html")
+		if err != nil {
+			http.Error(w, "index file not found", http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.Write(data)
 	})
 
 	port := os.Getenv("PORT")
