@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-slate-950 antialiased;
+  background-color: #374955;
+  background-image: radial-gradient(circle at 20% 10%, rgba(148,67,67,0.18), transparent 30%), radial-gradient(circle at 80% 20%, rgba(21,105,76,0.18), transparent 32%), linear-gradient(180deg, #374955 0%, #36617A 45%, #A5896E 100%);
+  background-attachment: fixed;
+}
+
+* {
+  @apply outline-none;
+}
+
+button {
+  @apply transition;
+}
+
+input {
+  @apply bg-slate-950/90 text-white;
+}

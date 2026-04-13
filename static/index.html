@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="relative min-h-screen text-slate-950">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_12%,_rgba(148,67,67,0.18),_transparent_32%),radial-gradient(circle_at_82%_18%,_rgba(21,105,76,0.16),_transparent_30%),linear-gradient(180deg,_rgba(55,73,85,0.75),_rgba(54,97,122,0.55),_rgba(165,137,110,0.45))]"></div>
+    <header class="relative z-10 flex justify-center py-6">
+      <p class="text-sm uppercase tracking-[0.35em] text-[#A5896E]">Weather Forecast - Built by Chukwunonso Asiegbu</p>
+    </header>
+    <main class="relative mx-auto flex min-h-screen items-center justify-center px-6 py-10">
+      <section class="w-full max-w-6xl space-y-6">
+        <div class="rounded-[2rem] border border-[#36617A]/50 bg-gradient-to-br from-[#A5896E]/65 via-[#374955]/35 to-[#36617A]/20 p-8 shadow-[0_30px_120px_rgba(15,23,42,0.18)]">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p class="text-sm uppercase tracking-[0.35em] text-[#15694C] font-bold">Powered by WeatherAPI</p>
+              <!-- <h1 class="mt-3 text-4xl font-semibold text-[#374955]">Weather Forecast</h1> -->
+              <p class="mt-3 max-w-2xl text-[#4a5b64]">Search by city name to get the latest weather conditions, humidity, wind speed, and a simple outlook.</p>
+            </div>
+          </div>
+
+          <form id="weather-form" class="mt-8 flex flex-col gap-4">
+            <div class="relative flex-1">
+              <div class="overflow-hidden rounded-full border border-[#36617A]/60 bg-gradient-to-r from-white/95 via-[#A5896E]/35 to-white/90 transition duration-300 focus-within:border-[#15694C]/70 focus-within:ring-2 focus-within:ring-[#944343]/20">
+                <input
+                  id="location-input"
+                  type="text"
+                  placeholder="Search for a city"
+                  class="w-full rounded-full bg-transparent px-5 py-4 pr-32 text-base text-slate-950 placeholder:text-black focus:outline-none"
+                  value="Berlin"
+                />
+              </div>
+              <button
+                type="submit"
+                class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-[#944343] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#374955]/20 transition hover:bg-[#70583E]"
+              >
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
+          <article class="rounded-[2rem] border border-[#374955]/40 bg-gradient-to-br from-[#374955]/85 via-[#15694C]/35 to-[#70583E]/25 p-8 shadow-[0_30px_120px_rgba(15,23,42,0.18)]">
+            <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <p id="weather-location" class="text-3xl font-semibold text-white">Berlin, DE</p>
+                <p id="weather-summary" class="mt-3 text-lg text-slate-200">Mostly cloudy with calm breeze</p>
+              </div>
+              <div class="flex items-end gap-4">
+                <p id="weather-temp" class="text-[5.5rem] font-bold leading-none text-white drop-shadow-sm">12°C</p>
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-[1.75rem] bg-gradient-to-br from-white/90 via-[#A5896E]/25 to-[#374955]/10 p-6">
+                <p class="text-sm uppercase tracking-[0.35em] text-[#15694C]">Humidity</p>
+                <p id="weather-humidity" class="mt-4 text-3xl font-semibold text-[#374955]">68%</p>
+              </div>
+              <div class="rounded-[1.75rem] bg-gradient-to-br from-white/90 via-[#15694C]/15 to-[#70583E]/10 p-6">
+                <p class="text-sm uppercase tracking-[0.35em] text-[#944343]">Wind</p>
+                <p id="weather-wind" class="mt-4 text-3xl font-semibold text-[#374955]">12 km/h</p>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <div class="flex items-center justify-between gap-4">
+                <p class="text-sm uppercase tracking-[0.35em] text-[#A5896E]">3-day outlook</p>
+                <p id="weather-updated" class="text-sm text-slate-200">Updated just now</p>
+              </div>
+              <div id="forecast-grid" class="mt-4 grid gap-3 sm:grid-cols-3"></div>
+            </div>
+          </article>
+
+          <aside class="rounded-[2rem] border border-[#70583E]/35 bg-gradient-to-br from-[#A5896E]/80 via-[#70583E]/40 to-[#944343]/30 p-8 shadow-[0_30px_80px_rgba(15,23,42,0.14)]">
+            <p class="text-sm uppercase tracking-[0.35em] text-[#374955]">Did you know?</p>
+            <h2 class="mt-4 text-2xl font-semibold text-[#944343]">Coming Soon !</h2>
+            <p class="mt-4 text-[#374955]">Searching for API that offers info about various states around the world. if i dont get any, I might have to scrap some websites.</p>
+          </aside>
+        </div>
+        <div id="status" class="min-h-[1.5rem] text-center text-sm text-rose-500"></div>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
